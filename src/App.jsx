@@ -7,7 +7,10 @@ function App() {
   return (
     <>
       <ProductState>
-        <div className="w-[80%] mx-auto mt-8 flex gap-3">
+        <div
+          className="w-[70%] mx-auto mt-8 flex gap-8 flex-wrap
+        "
+        >
           <Products />
           <Cart />
         </div>

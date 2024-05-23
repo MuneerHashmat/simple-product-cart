@@ -6,31 +6,40 @@ const Cart = () => {
   const cartItems = states.cartItems;
 
   return (
-    <div className="w-[35%] border-2 border-gray-500 py-1 px-3">
-      <h1>Cart</h1>
-      {cartItems.length == 0 ? (
-        <p>No items in the cart</p>
-      ) : (
-        cartItems.map((item, index) => (
-          <div key={index} className="flex justify-between">
-            <span>{item.name}</span>
+    <div className="w-[35%] h-[300px] border-4 border-gray-400 relative">
+      <h1 className=" text-center text-2xl mb-5 w-full py-1 bg-blue-300">
+        Cart
+      </h1>
+      <div className="flex flex-col gap-2 text-lg px-3">
+        {cartItems.length == 0 ? (
+          <p className=" text-center text-red-500">No items in the cart</p>
+        ) : (
+          cartItems.map((item, index) => (
+            <div
+              key={index}
+              className="flex justify-between bg-gray-300 py-2 px-3 items-center"
+            >
+              <span>{item.name}</span>
+              <span>
+                {item.quantity} x {item.price}
+              </span>
+            </div>
+          ))
+        )}
+      </div>
+
+      <div>
+        {cartItems.length == 0 ? null : (
+          <div className="flex justify-between bg-gray-300 py-2 px-3 items-center text-lg absolute bottom-0 w-full left-0">
+            <span>Total: </span>
             <span>
-              {item.quantity} x {item.price}
+              {cartItems.reduce((total, item) => {
+                return (total += item.price * item.quantity);
+              }, 0)}
             </span>
           </div>
-        ))
-      )}
-
-      {cartItems.length == 0 ? null : (
-        <div>
-          <span>Total: </span>
-          <span>
-            {cartItems.reduce((total, item) => {
-              return (total += item.price * item.quantity);
-            }, 0)}
-          </span>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
